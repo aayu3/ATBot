@@ -20,6 +20,19 @@ function searchEmoteInArray (str, strArray) {
   return -1;
 }
 
+//Emote List Embed
+const emotesEmbed = new Discord.MessageEmbed()
+                      .setColor('#0099ff')
+                      .setTitle('Emotes');
+
+function addEmoteNamesToEmbed(emotes, embed, messageStart, messageEnd) {
+  embed.fields = [];
+  let commands = emotes[messageStart].split(".")[0];
+  for (var j=messageStart+1; j<messageEnd; j++) {
+    commands = commands + "\n" + emotes[j].split(".")[0];
+  }
+  embed.addField("Commands: ", commands);
+}
 
 
 client.login(process.env.BOT_TOKEN);
@@ -27,8 +40,6 @@ client.login(process.env.BOT_TOKEN);
 client.on('ready', () => {
   console.log('The Bot is ready!')
 });
-
-
 // Search for emote name and replace with image
 client.on('message', (msg) => {
   let result = searchEmoteInArray(msg.content, emoteNames);
@@ -43,11 +54,11 @@ client.on('message', (msg) => {
 client.on('message', (msg) => {
   if (msg.content == "!emotes") {
     const channel = msg.channel;
-    channel.send("__**Emotes**__")
-    for (var j=0; j<emoteNames.length; j++) {
-      let splitStr = emoteNames[j].split(".");
-      channel.send((j+1) + ". " + splitStr[0]);
-    }
+    addEmoteNamesToEmbed(emoteNames,emotesEmbed,0,6);
+    channel.send(emotesEmbed).then(sentEmbed => {
+    sentEmbed.react("⬅")
+    sentEmbed.react("➡")
+    });
   }
 });
 
