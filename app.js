@@ -8,12 +8,24 @@ const client = new Discord.Client({
 
 client.login(process.env.BOT_TOKEN);
 
-client.on('ready', () => console.log('The Bot is ready!'));
+client.on('ready', () => {
+  console.log('The Bot is ready!')
+});
 
+client.on('message', (msg) => {
+  if (msg.content === 'yukicry') {
+    const channel = msg.channel;
+    channel.send('https://imgur.com/T5URdcJ');
+    msg.delete();
+  }
+  
+
+});
 // Adding Jokes Function
 
 // Jokes from dcslsoftware.com/20-one-liners-only-software-developers-understand/
 // www.journaldev.com/240/my-25-favorite-programming-quotes-that-are-funny-too
+/*
 const jokes = [
   'I went to a street where the houses were numbered 8k, 16k, 32k, 64k, 128k, 256k and 512k. It was a trip down Memory Lane.',
   'If doctors were like software engineers, they would say things like “Have you tried killing yourself and being reborn?”',
@@ -110,3 +122,4 @@ stream.on('tweet', (tweet) => {
   client.channels.cache.get(dest).send(twitterMessage);
   return;
 });
+*/

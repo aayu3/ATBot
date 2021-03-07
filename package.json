@@ -1,7 +1,7 @@
 {
   "name": "SmashingBot",
   "version": "1.0.0",
-  "description": "",
+  "description": "The `Discord.js` library provides the ability to interact with the discord API very easily.\r The bot have the following functionalities",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,5 +15,13 @@
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "twit": "^2.2.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aayu3/ActionTaimaninBot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aayu3/ActionTaimaninBot/issues"
+  },
+  "homepage": "https://github.com/aayu3/ActionTaimaninBot#readme"
 }
