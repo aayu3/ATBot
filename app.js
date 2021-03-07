@@ -1,10 +1,26 @@
 const Discord = require('discord.js');
 const Twit = require('twit');
+const fs = require('fs');
 require('dotenv').config();
 
 const client = new Discord.Client({
   partials: ['MESSAGE', 'REACTION', 'CHANNEL'],
 });
+
+// Get names of emotes from taimanin_emotes so the bot can search for them
+let emotePath = "taimanin_emotes";
+let emoteNames = fs.readdirSync(emotePath);
+
+function searchEmoteInArray (str, strArray) {
+  for (var j=0; j<strArray.length; j++) {
+      if (strArray[j] === str + ".png") {
+        return j;
+      }
+  }
+  return -1;
+}
+
+
 
 client.login(process.env.BOT_TOKEN);
 
@@ -12,15 +28,29 @@ client.on('ready', () => {
   console.log('The Bot is ready!')
 });
 
+
+// Search for emote name and replace with image
 client.on('message', (msg) => {
-  if (msg.content === 'yukicry') {
+  let result = searchEmoteInArray(msg.content, emoteNames);
+  if (result !== -1) {
     const channel = msg.channel;
-    channel.send('https://imgur.com/T5URdcJ');
+    channel.send({files: ["taimanin_emotes/" + emoteNames[result]]});
     msg.delete();
   }
-  
-
 });
+
+// list emote command
+client.on('message', (msg) => {
+  if (msg.content == "!emotes") {
+    const channel = msg.channel;
+    channel.send("__**Emotes**__")
+    for (var j=0; j<emoteNames.length; j++) {
+      let splitStr = emoteNames[j].split(".");
+      channel.send((j+1) + ". " + splitStr[0]);
+    }
+  }
+});
+
 // Adding Jokes Function
 
 // Jokes from dcslsoftware.com/20-one-liners-only-software-developers-understand/
