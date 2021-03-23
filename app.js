@@ -36,6 +36,37 @@ function sanitizeCommand(msg) {
   return sanitized.split(" ");
 }
 
+// function to get a user from the client.users.cache Collection given a mention
+function getUserFromMention(mention) {
+	if (!mention) return;
+
+	if (mention.startsWith('<@') && mention.endsWith('>')) {
+		mention = mention.slice(2, -1);
+
+		if (mention.startsWith('!')) {
+			mention = mention.slice(1);
+		}
+
+		return client.users.cache.get(mention);
+	}
+}
+
+// function to get a user from the client.users.cache Collection given a mention
+function getMemberFromMention(msg, mention) {
+	if (!mention) return;
+
+	if (mention.startsWith('<@') && mention.endsWith('>')) {
+		mention = mention.slice(2, -1);
+
+		if (mention.startsWith('!')) {
+			mention = mention.slice(1);
+		}
+
+		return msg.guild.members.fetch(mention);
+	}
+}
+
+
 //Emote List Embed
 const emotesEmbed = new Discord.MessageEmbed()
                       .setColor('#0099ff')
@@ -85,10 +116,37 @@ client.on('message', (msg) => {
 // list emote command
 client.on('message', (msg) => {
   let messageContents = sanitizeCommand(msg);
-  if (msg.content == "mute") {
+  if (messageContents[0] == "mute") {
+    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
+      if (messageContents.length <= 1) {
+        msg.reply("Please specify a user to mute");
+      } else {
+        let userMentioned = getUserFromMention(messageContents[1]);
+        let memberMentioned = getMemberFromMention(msg, messageContents[1]);
+        if (!userMentioned) {
+          return msg.reply('Please use a proper mention to mute');
+        } else {
+          // using this as a temporary solution until i fix getMemberFromMention
+          let member = msg.mentions.members.first();
+          let mutedRole = msg.guild.roles.cache.find(r => r.name === "Muted");
+          let memberRole = msg.guild.roles.cache.find(r => r.name === "Member");
+          member.roles.add(mutedRole);
+          member.roles.remove(memberRole);
+          msg.reply(userMentioned.toString() + " has been muted");
+
+
+        }
+      }
+    } else {
+      msg.reply("You do not have sufficient permission to use this command.")
+    }
+
+      
     
   }
 });
+
+
 
 
 // Adding Jokes Function
