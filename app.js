@@ -84,6 +84,7 @@ client.on('message', (msg) => {
 //mute command
 // list emote command
 client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
   if (msg.content == "mute") {
     
   }
