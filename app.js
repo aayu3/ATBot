@@ -27,6 +27,15 @@ function searchEmoteInArray (str, strArray) {
   return -1;
 }
 
+// function to sanitize msgs and return an array of commands and arguments
+// returns 0 if the message is not a command
+// i.e `!mute @jeff` becomes ['mute', 'jeff'];
+function sanitizeCommand(msg) {
+  if (!msg.content.startsWith(prefix)) return 0;
+  let sanitized = msg.content.replace(prefix,'');
+  return sanitized.split(" ");
+}
+
 //Emote List Embed
 const emotesEmbed = new Discord.MessageEmbed()
                       .setColor('#0099ff')
@@ -47,11 +56,11 @@ client.login(process.env.BOT_TOKEN);
 client.on('ready', () => {
   console.log('The Bot is ready!')
 });
+
 // Search for emote name and replace with image
 client.on('message', (msg) => {
-  if(!msg.content.startsWith(prefix)) return;
-  let sanitized = msg.content.replace(prefix,'');
-  let result = searchEmoteInArray(sanitized, emoteNames);
+  let messageContents = sanitizeCommand(msg);
+  let result = searchEmoteInArray(messageContents[0], emoteNames);
   if (result !== -1) {
     const channel = msg.channel;
     channel.send({files: ["taimanin_emotes/" + emoteNames[result]]});
@@ -61,9 +70,8 @@ client.on('message', (msg) => {
 
 // list emote command
 client.on('message', (msg) => {
-  if(!msg.content.startsWith(prefix)) return;
-  let sanitized = msg.content.replace(prefix,'');
-  if (sanitized == "!emotes") {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "emotes") {
     const channel = msg.channel;
     addEmoteNamesToEmbed(emoteNames,emotesEmbed,0,6);
     channel.send(emotesEmbed).then(sentEmbed => {
@@ -76,13 +84,8 @@ client.on('message', (msg) => {
 //mute command
 // list emote command
 client.on('message', (msg) => {
-  if (msg.content == "!mute") {
-    const channel = msg.channel;
-    addEmoteNamesToEmbed(emoteNames,emotesEmbed,0,6);
-    channel.send(emotesEmbed).then(sentEmbed => {
-    sentEmbed.react("⬅")
-    sentEmbed.react("➡")
-    });
+  if (msg.content == "mute") {
+    
   }
 });
 
