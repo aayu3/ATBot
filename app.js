@@ -3,6 +3,13 @@ const Twit = require('twit');
 const fs = require('fs');
 require('dotenv').config();
 
+const prefix = "!";
+const adminID = 817548398453325864;
+const moderatorID = 817631086673788938;
+const memberID = 817541859672981514;
+const mutedID = 824030853298257982;
+const tooHornyID = 818316012121882644;
+
 const client = new Discord.Client({
   partials: ['MESSAGE', 'REACTION', 'CHANNEL'],
 });
@@ -42,7 +49,9 @@ client.on('ready', () => {
 });
 // Search for emote name and replace with image
 client.on('message', (msg) => {
-  let result = searchEmoteInArray(msg.content, emoteNames);
+  if(!msg.content.startsWith(prefix)) return;
+  let sanitized = msg.content.replace(prefix,'');
+  let result = searchEmoteInArray(sanitized, emoteNames);
   if (result !== -1) {
     const channel = msg.channel;
     channel.send({files: ["taimanin_emotes/" + emoteNames[result]]});
@@ -52,7 +61,9 @@ client.on('message', (msg) => {
 
 // list emote command
 client.on('message', (msg) => {
-  if (msg.content == "!emotes") {
+  if(!msg.content.startsWith(prefix)) return;
+  let sanitized = msg.content.replace(prefix,'');
+  if (sanitized == "!emotes") {
     const channel = msg.channel;
     addEmoteNamesToEmbed(emoteNames,emotesEmbed,0,6);
     channel.send(emotesEmbed).then(sentEmbed => {
@@ -61,6 +72,20 @@ client.on('message', (msg) => {
     });
   }
 });
+
+//mute command
+// list emote command
+client.on('message', (msg) => {
+  if (msg.content == "!mute") {
+    const channel = msg.channel;
+    addEmoteNamesToEmbed(emoteNames,emotesEmbed,0,6);
+    channel.send(emotesEmbed).then(sentEmbed => {
+    sentEmbed.react("⬅")
+    sentEmbed.react("➡")
+    });
+  }
+});
+
 
 // Adding Jokes Function
 
