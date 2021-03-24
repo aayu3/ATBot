@@ -223,8 +223,6 @@ client.on('message', (msg) => {
   }
 });
 
-// Adding Jokes Function
-
 // Jokes from dcslsoftware.com/20-one-liners-only-software-developers-understand/
 // www.journaldev.com/240/my-25-favorite-programming-quotes-that-are-funny-too
 /*
