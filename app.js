@@ -52,18 +52,8 @@ function getUserFromMention(mention) {
 }
 
 // function to get a user from the client.users.cache Collection given a mention
-function getMemberFromMention(msg, mention) {
-	if (!mention) return;
-
-	if (mention.startsWith('<@') && mention.endsWith('>')) {
-		mention = mention.slice(2, -1);
-
-		if (mention.startsWith('!')) {
-			mention = mention.slice(1);
-		}
-
-		return msg.guild.members.fetch(mention);
-	}
+function getMemberFromMention(msg) {
+	return msg.mentions.members.first();
 }
 
 
@@ -113,7 +103,6 @@ client.on('message', (msg) => {
 });
 
 //mute command
-// list emote command
 client.on('message', (msg) => {
   let messageContents = sanitizeCommand(msg);
   if (messageContents[0] == "mute") {
@@ -122,16 +111,15 @@ client.on('message', (msg) => {
         msg.reply("Please specify a user to mute");
       } else {
         let userMentioned = getUserFromMention(messageContents[1]);
-        let memberMentioned = getMemberFromMention(msg, messageContents[1]);
+        let memberMentioned = getMemberFromMention(msg);
         if (!userMentioned) {
           return msg.reply('Please use a proper mention to mute');
         } else {
           // using this as a temporary solution until i fix getMemberFromMention
-          let member = msg.mentions.members.first();
           let mutedRole = msg.guild.roles.cache.find(r => r.name === "Muted");
           let memberRole = msg.guild.roles.cache.find(r => r.name === "Member");
-          member.roles.add(mutedRole);
-          member.roles.remove(memberRole);
+          memberMentioned.roles.add(mutedRole);
+          memberMentioned.roles.remove(memberRole);
           msg.reply(userMentioned.toString() + " has been muted");
 
 
@@ -140,14 +128,82 @@ client.on('message', (msg) => {
     } else {
       msg.reply("You do not have sufficient permission to use this command.")
     }
-
-      
-    
   }
 });
 
 
+//bonk function for too horny role
+//mute command
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "bonk") {
+    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
+      if (messageContents.length <= 1) {
+        msg.reply("Please specify a user to bonk");
+      } else {
+        let userMentioned = getUserFromMention(messageContents[1]);
+        let memberMentioned = getMemberFromMention(msg);
+        if (!userMentioned) {
+          return msg.reply('Please use a proper mention to bonk');
+        } else {
+          // using this as a temporary solution until i fix getMemberFromMention
+          let hornyRole = msg.guild.roles.cache.find(r => r.name === "Horny");
+          let memberRole = msg.guild.roles.cache.find(r => r.name === "Member");
+          memberMentioned.roles.add(hornyRole);
+          memberMentioned.roles.remove(memberRole);
+          msg.reply(userMentioned.toString() + " has been sent to <#818313211538309130>");
+          msg.channel.send({files: ["bonk.gif"]});
+        }
+      }
+    } else {
+      msg.reply("You do not have sufficient permission to use this command.");
+    }
+  }
+});
 
+// change name function
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "setName") {
+    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
+      messageContents.shift();
+      let name = messageContents.join(' ');
+      client.user.setUsername(name);
+      msg.reply("Name has been set to: " + name);
+    } else {
+      msg.reply("You do not have sufficient permission to use this command.")
+    }
+  }
+});
+
+// change status function
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "setStatus") {
+    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
+      messageContents.shift();
+      let name = messageContents.join(' ');
+      client.user.setActivity(name);
+      msg.reply("Status has been set to: " + name);
+    } else {
+      msg.reply("You do not have sufficient permission to use this command.")
+    }
+  }
+});
+
+// change avatar function
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "setAvatar") {
+    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
+      messageContents.shift();
+      let name = messageContents.join(' ');
+      client.user.setAvatar(name);
+    } else {
+      msg.reply("You do not have sufficient permission to use this command.")
+    }
+  }
+});
 
 // Adding Jokes Function
 
