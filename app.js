@@ -205,6 +205,24 @@ client.on('message', (msg) => {
   }
 });
 
+// get member ID
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "getMemberID") {
+    let memberMentioned = getMemberFromMention(msg);
+    console.log(memberMentioned.id);
+  }
+});
+
+// test member id
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "pingMemberByID") {
+    let memberMentioned = msg.guild.members.cache.get(messageContents[1]);
+    msg.channel.send(memberMentioned.toString());
+  }
+});
+
 // Adding Jokes Function
 
 // Jokes from dcslsoftware.com/20-one-liners-only-software-developers-understand/
