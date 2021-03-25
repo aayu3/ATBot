@@ -1,0 +1,15 @@
+{
+    "Name" : "Watarase Tsumugi",
+    "Number" : 30,
+    "Type" : "Suppress",
+    "Rarity" : "UR",
+    "Source" : "Offered for $0.99 USD when after a mission is completed at random",
+    "Unawakened" : "/supporter_images/030_0",
+    "Awakened" : "/supporter_images/030_1",
+    "SubSkillName" : "Heavyweight Cavalry",
+    "SubSkill" : "Increases Gold and character EXP gained by 7.5% (Max 15%)",
+    "MainSkillName" : "Weight Art: Hyperweight Zone",
+    "MainSkillActive" : "Creates a hypergravity field that slows down all enemies by 25% (Max 50%); reverses gravity after 6 seconds, dealing 110% (Max 220%) damage and knocks up the enemies.",
+    "MainSkillPassive" : false,
+    "CD" : 57
+  }

@@ -1,0 +1,15 @@
+{
+    "Name" : "Koukawa Asuka",
+    "Number" : 48,
+    "Type" : "Suppress",
+    "Rarity" : "UR",
+    "Source" : "Limited Gacha",
+    "Unawakened" : "/supporter_images/048_0",
+    "Awakened" : "/supporter_images/048_1",
+    "SubSkillName" : "Adaptive Android Arms",
+    "SubSkill" : "Increases damage dealt to Machine, Demon, or Human-type enemies by 18% (swaps target/typing every 5 seconds). (Max 36%)",
+    "MainSkillName" : "Kill-Em-All Missiles",
+    "MainSkillActive" : "Launches a rocket punch that deals 350% (Max 700%) damage and knocks back the target.",
+    "MainSkillPassive" : "When dodging incoming attacks, she fires a small missile that deals 40% (Max 80%) damage and knocks back her target (applied every 5 seconds).",
+    "CD" : 50
+  }

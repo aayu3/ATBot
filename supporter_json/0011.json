@@ -1,0 +1,15 @@
+{
+    "Name" : "Shirase Yuzuriha",
+    "Number" : 11,
+    "Type" : "Protect",
+    "Rarity" : "SR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/011_0",
+    "Awakened" : "/supporter_images/011_1",
+    "SubSkillName" : "Trap Wire",
+    "SubSkill" : "Increases damage dealt with ranged attacks on snared enemies by 10% (Max 20%)",
+    "MainSkillName" : "Marionette Ward",
+    "MainSkillActive" : false,
+    "MainSkillPassive" : "Snares up to 4 random enemies for 3 seconds (Max 6 seconds). Applies every 4.5 seconds with a 50% chance.",
+    "CD" : false
+  }

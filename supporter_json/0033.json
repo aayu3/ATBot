@@ -1,0 +1,15 @@
+{
+    "Name" : "Kamiki Suzune",
+    "Number" : 33,
+    "Type" : "Protect",
+    "Rarity" : "UR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/033_0",
+    "Awakened" : "/supporter_images/033_1",
+    "SubSkillName" : "Heiress of the Sacred Tree",
+    "SubSkill" : "Reduces damage taken from all enemies by 12% (Max 24%)",
+    "MainSkillName" : "Wood Art: Rewind",
+    "MainSkillActive" : "Reduced the duration of all debuffs by 30% (Max 60%) for 15 seconds; restores 3% (Max 6%) of lost HP every 3 seconds",
+    "MainSkillPassive" : false,
+    "CD" : 54
+  }

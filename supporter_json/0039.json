@@ -1,0 +1,15 @@
+{
+    "Name" : "[Surge] Mizuki Yukikaze",
+    "Number" : 39,
+    "Type" : "Suppress",
+    "Rarity" : "UR",
+    "Source" : "Limited Gacha",
+    "Unawakened" : "/supporter_images/039_0",
+    "Awakened" : "/supporter_images/039_1",
+    "SubSkillName" : "Magnetic Field",
+    "Sub Skill" : "Increase your ranged attack's critical rate by 8% (Max 16%) and critical damage by 18% (Max 36%) against Stunned or Groggy enemies.",
+    "MainSkillName" : "Lightning Mirror",
+    "Main Skill (Active)" : false,
+    "Main Skill (Passive)" : "Passive: Counterattacks the incoming attack and deals 85% (Max 170%) of the incoming damage. Every 4th counterattack deals additional damage and Stuns the enemy.",
+    "CD" : false
+  }

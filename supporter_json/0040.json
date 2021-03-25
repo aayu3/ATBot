@@ -1,0 +1,15 @@
+{
+    "Name" : "Kuonji R. Spica",
+    "Number" : 40,
+    "Type" : "Suppress",
+    "Rarity" : "UR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/040_0",
+    "Awakened" : "/supporter_images/040_1",
+    "SubSkillName" : "Samurai Shooter",
+    "SubSkill" : "Increases critical rate of melee attacks by 8% (Max 16%) \n Increases critical damage of ranged attacks by 16% (Max 36%)",
+    "MainSkillName" : "Water Art: Bubbles",
+    "MainSkillActive" : "Fires a bubble bullet that bounces between all enemies, dealing 350% (Max 700%) damage and becomes invulnerable for 7 (Max 14) seconds.",
+    "MainSkillPassive" : false,
+    "CD" : 49
+  }

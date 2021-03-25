@@ -1,0 +1,15 @@
+{
+    "Name" : "Natsu Basara",
+    "Number" : 24,
+    "Type" : "Protect",
+    "Rarity" : "R",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/024_0",
+    "Awakened" : "/supporter_images/024_1",
+    "SubSkillName" : "Entomic Body",
+    "SubSkill" : "Increases HP restored from all sources by 20%. (Max 40%)",
+    "MainSkillName" : false,
+    "MainSkillActive" : false,
+    "MainSkillPassive" : false,
+    "CD" : false
+  }

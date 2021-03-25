@@ -1,0 +1,15 @@
+{
+    "Name" : "Anemone",
+    "Number" : 49,
+    "Type" : "Suppress",
+    "Rarity" : "UR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/049_0",
+    "Awakened" : "/supporter_images/049_1",
+    "SubSkillName" : "The Spider Princess",
+    "SubSkill" : "Reduces damage taken from Demon-type enemies by 7% (Max 14%); increases damage dealt to Demon-type enemies by 12% (Max 24%).",
+    "MainSkillName" : "Anubis Call",
+    "MainSkillActive" : "Deals 285% (Max 570%) damage to all enemies, and reduces their HP restore by 35% (Max 70%) for 15 seconds.",
+    "MainSkillPassive" : false,
+    "CD" : 57
+  }

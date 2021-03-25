@@ -1,0 +1,15 @@
+{
+    "Name" : "Shinohara Mari",
+    "Number" : 38,
+    "Type" : "Suppress",
+    "Rarity" : "UR",
+    "Source" : "Event: Shinohara Mari's Training Session",
+    "Unawakened" : "/supporter_images/038_0",
+    "Awakened" : "/supporter_images/038_1",
+    "SubSkillName" : "Earthen Class Rep",
+    "SubSkill" : "Reduces damage taken from all enemies by 18% (Max 36%)",
+    "MainSkillName" : "Earthen Protection",
+    "MainSkillActive" : "Deals 284% (Max 568%) damage and knocks up up to 3 random enemies; gains Super Armor for 16 seconds",
+    "MainSkillPassive" : false,
+    "CD" : 45
+  }

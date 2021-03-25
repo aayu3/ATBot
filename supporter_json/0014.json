@@ -1,0 +1,15 @@
+{
+    "Name" : "Merci",
+    "Number" : 14,
+    "Type" : "Assist",
+    "Rarity" : "SR",
+    "Source" : "Mileage Shop",
+    "Unawakened" : "/supporter_images/014_0",
+    "Awakened" : "/supporter_images/014_1",
+    "SubSkillName" : "Capricious Cat",
+    "SubSkill" : "20% (Max 40%) chance to obtain a bonus item upon completing a quest.",
+    "MainSkillName" : "Payday Cat",
+    "MainSkillActive" : false,
+    "MainSkillPassive" : "Increase Gold gained by 14% (Max 28%) when completing quests.",
+    "CD" : false
+  }

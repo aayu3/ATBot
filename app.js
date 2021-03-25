@@ -1,7 +1,15 @@
 const Discord = require('discord.js');
 const Twit = require('twit');
 const fs = require('fs');
+const supporterSearch = require("./supporterSearch.js")
 require('dotenv').config();
+
+
+//get files ready
+let supporterPath = "supporter_json";
+let supporterJSONs = fs.readdirSync(supporterPath);
+const supporters = supporterSearch.parseJSON(supporterJSONs);
+
 
 const prefix = "!";
 const adminID = 817548398453325864;
@@ -85,6 +93,7 @@ client.on('message', (msg) => {
   if (result !== -1) {
     const channel = msg.channel;
     channel.send({files: ["taimanin_emotes/" + emoteNames[result]]});
+    console.log(emoteNames[result]);
     msg.delete();
   }
 });
@@ -191,6 +200,20 @@ client.on('message', (msg) => {
   }
 });
 
+// get emote as string function
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "getEmote") {
+    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
+      messageContents.shift();
+      let name = messageContents.join(' ');
+      msg.reply("The emote is: ```" + name + "```");
+    } else {
+      msg.reply("You do not have sufficient permission to use this command.")
+    }
+  }
+});
+
 // change avatar function
 client.on('message', (msg) => {
   let messageContents = sanitizeCommand(msg);
@@ -220,6 +243,25 @@ client.on('message', (msg) => {
   if (messageContents[0] == "pingMemberByID") {
     let memberMentioned = msg.guild.members.cache.get(messageContents[1]);
     msg.channel.send(memberMentioned.toString());
+  }
+});
+
+// Search by number
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "search") {
+    if (isNaN(parseInt(messageContents[1]))) {
+      msg.reply("Please supply a valid search query");
+    } else {
+      let num = parseInt(messageContents[1]) - 1;
+      if (num < 0 || num > supporters.length - 1) {
+        msg.reply("Please provide a number in the correct range: 1 - " + supporters.length - 1);
+      } else {
+        let sup = supporterSearch.searchByNumber(num + 1, supporters);
+        msg.channel.send(supporterSearch.printSupporter(sup));
+        msg.channel.send({files: ["supporter_images/" + sup.Awakened + ".png"]});
+      }
+    }
   }
 });
 

@@ -1,0 +1,15 @@
+{
+    "Name" : "Nanase Mai",
+    "Number" : 1,
+    "Type" : "Protect",
+    "Rarity" : "SR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/001_0",
+    "Awakened" : "/supporter_images/001_1",
+    "SubSkillName" : "Protective Paper",
+    "SubSkill" : "Reduces damage taken from all enemies by 10% (Max 20%)",
+    "MainSkillName" : "Paper Spirit",
+    "MainSkillActive" : "Reduces all damage taken by 25% (Max 50%) for 16 seconds.",
+    "MainSkillPassive" : false,
+    "CD" : 45
+  }

@@ -1,0 +1,15 @@
+{
+    "Name" : "(Battle) Igawa Asagi",
+    "Number" : 29,
+    "Type" : "Assist",
+    "Rarity" : "UR",
+    "Source" : "Limited Gacha",
+    "Unawakened" : "/supporter_images/029_0",
+    "Awakened" : "/supporter_images/029_1",
+    "SubSkillName" : "Battle Taimanin",
+    "SubSkill" : "Increases damage dealt with Ultimate by 20% (Max 40%).",
+    "MainSkillName" : "Koujin Zanka",
+    "MainSkillActive" : "Briefly moves at the speed of light. Reduces defense of all enemies by 18% (Max 36%) and slows them for 8 seconds.",
+    "MainSkillPassive" : false,
+    "CD" : 60
+  }
