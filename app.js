@@ -259,7 +259,7 @@ client.on('message', (msg) => {
       } else {
         let sup = supporterSearch.searchByNumber(num + 1, supporters);
         msg.channel.send(supporterSearch.printSupporter(sup));
-        msg.channel.send({files: ["supporter_images/" + sup.Awakened + ".png"]});
+        msg.channel.send({files: [sup.Awakened + ".png"]});
       }
     }
   }
