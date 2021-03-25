@@ -6,10 +6,8 @@ require('dotenv').config();
 
 
 //get files ready
-let supporterPath = "supporter_json";
-let supporterJSONs = fs.readdirSync(supporterPath);
-const supporters = supporterSearch.parseJSON(supporterJSONs);
-
+let rawdata = fs.readFileSync("supporters.json");
+supporters = JSON.parse(rawdata);
 
 const prefix = "!";
 const adminID = 817548398453325864;

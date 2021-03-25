@@ -1,5 +1,23 @@
 const fs = require('fs');
+const request = require('request');
 
+const url = "https://aayu3.github.io/ATBotJSONDependencies/supporter_json/0001.json";
+
+let options = {json: true};
+
+
+let sup;
+request(url, options, (error, res, body) => {
+    if (error) {
+        return  console.log(error)
+    };
+
+    if (!error && res.statusCode == 200) {
+        sup = body;
+        console.log(sup.Name);
+    };
+});
+console.log(sup);
 // Declare emotes for formatting
 const suppressEmote = "<:suppress:824484622851112990>";
 const protectEmote = "<:protect:824484622544404501>";
@@ -8,25 +26,14 @@ const rareEmote = "<:rare:824486578247172106>";
 const srEmote = "<:SR:824486914065301514>";
 const urEmote = "<:UR:824486578273255424>";
 
-const url = "https://aayu3.github.io/ATBotJSONDependencies/supporter_json/0001.json";
 
 
 // Setting up FS variables
-let supporterPath = "supporter_json";
-let supporterJSONs = fs.readdirSync(supporterPath);
+let rawdata = fs.readFileSync("supporters.json");
+supporters = JSON.parse(rawdata);
 
 module.exports = {
 // parses all the files in the folder into JSON objects
-    parseJSON: function  (folder) {
-        var supporters = [];
-        for (var i = 0; i < folder.length; i++) {
-            let rawdata = fs.readFileSync(supporterPath + "/" + folder[i]);
-            let sup = JSON.parse(rawdata);
-            supporters.push(sup);
-        }
-        return supporters;
-    },
-
     // prints supporter info before the image
     printSupporter: function (supporter) {
         // Name and Rarity Formatting
