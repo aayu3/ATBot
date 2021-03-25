@@ -251,11 +251,26 @@ client.on('message', (msg) => {
   let messageContents = sanitizeCommand(msg);
   if (messageContents[0] == "search") {
     if (isNaN(parseInt(messageContents[1]))) {
-      msg.reply("Please supply a valid search query");
+      // In this case the person is searching by name
+      let filteredSups = supporterSearch.filterByName(messageContents[1], supporters);
+      if (filteredSups.length == 0) {
+        msg.reply("There is no supporter with the name: " + messageContents[1]);
+      } else if (filteredSups.length == 1) {
+        let sup = filteredSups[0];
+        msg.channel.send(supporterSearch.printSupporter(sup));
+        msg.channel.send({files: [sup.Awakened + ".png"]});
+      } else {
+        let strings = supporterSearch.printMultiSupporters(filteredSups);
+        console.log(strings);
+        for (var i = 0; i < strings.length; i++) {
+          msg.channel.send(strings[i]);
+        }
+      }
     } else {
+      // In this case the person is searching by number
       let num = parseInt(messageContents[1]) - 1;
       if (num < 0 || num > supporters.length - 1) {
-        msg.reply("Please provide a number in the correct range: 1 - " + supporters.length - 1);
+        msg.reply("Please provide a number in the correct range: 1 - " + (supporters.length));
       } else {
         let sup = supporterSearch.searchByNumber(num + 1, supporters);
         msg.channel.send(supporterSearch.printSupporter(sup));
@@ -264,5 +279,7 @@ client.on('message', (msg) => {
     }
   }
 });
+
+
 
 // Token Change

@@ -67,8 +67,65 @@ module.exports = {
         return strRep
     },
 
+    printMultiSupporters: function(supporters) {
+        let strs = []
+        str = "";
+        for (var i = 0; i < supporters.length; i++) {
+            if (str.length < 2000 && str.length > 1900) {
+                strs.push(str);
+                str = "";
+            }
+            let sup = supporters[i];
+            // add rarity at front
+            if (sup.Rarity === "R") {
+                str = str + rareEmote;
+            } else if (sup.Rarity == "SR") {
+                str = str + srEmote;
+            } else if (sup.Rarity == "UR") {
+                str = str + urEmote;
+            }
+
+            // add name
+            str = str + " **" + sup.Name + "** ";
+
+            // add type
+            if (sup.Type === "Suppress") {
+                str = str + suppressEmote;
+            } else if (sup.Type === "Protect") {
+                str = str + protectEmote;
+            } else if (sup.Type === "Assist") {
+                str = str + assistEmote;
+            }
+            str = str + "\n";
+        }
+        str = str.substring(0, str.length - 1);
+        return strs;
+    },
+
     // assumes the input is legal
     searchByNumber: function (num, supporters) {
         return supporters[num-1];
+    },
+
+    filterByName: function(str, supporters) {
+        let filtered = [];
+        for (var i = 0; i < supporters.length; i++) {
+            let sup = supporters[i];
+            if (sup.Name.toLowerCase().includes(str.toLowerCase())) {
+                filtered.push(sup);
+            }
+        }
+        return filtered;
+    },
+
+    filterByRarity: function(rarity, supporters) {
+        let filtered = [];
+        for (var i = 0; i < supporters.length; i++) {
+            let sup = supporters[i];
+            if (sup.Rarity.toLowerCase().includes(rarity.toLowerCase())) {
+                filtered.push(sup);
+            }
+        }
+        return filtered;
     }
 }

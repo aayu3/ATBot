@@ -1,5 +1,5 @@
 {
-  "name": "SmashingBot",
+  "name": "AT Discord Bot",
   "version": "1.0.0",
   "description": "The `Discord.js` library provides the ability to interact with the discord API very easily.\r The bot have the following functionalities",
   "main": "index.js",
