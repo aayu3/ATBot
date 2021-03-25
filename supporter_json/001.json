@@ -6,8 +6,8 @@
     "Source" : "Standard Gacha",
     "Unawakened" : "/supporter_images/001_0",
     "Awakened" : "/supporter_images/001_1",
-    "Sub Skill" : "Sub Skill Text",
-    "Main Skill (Active)" : "Main Skill Text Active",
+    "Sub Skill" : "Reduces damage taken from all enemies by 10% (Max 20%)",
+    "Main Skill (Active)" : "Reduces all damage taken by 25% (Max 50%) for 16 seconds.",
     "Main Skill (Passive)" : false,
-    "CD" : 69
+    "CD" : 45
   }
