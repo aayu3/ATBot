@@ -1,13 +1,15 @@
 {
-    "Name" : "Mrs. Supporter",
+    "Name" : "Supporter",
     "Number" : 69,
     "Type" : "Assist",
     "Rarity" : "UR",
     "Source" : "Standard Gacha",
     "Unawakened" : "/supporter_images/069_0",
     "Awakened" : "/supporter_images/069_1",
-    "Sub Skill" : "Sub Skill Text",
-    "Main Skill (Active)" : "Main Skill Text Active",
-    "Main Skill (Passive)" : false,
+    "SubSkillName" : "Name",
+    "SubSkill" : "Text",
+    "MainSkillName" : "Name",
+    "MainSkillActive" : "Text",
+    "MainSkillPassive" : false,
     "CD" : 69
   }
