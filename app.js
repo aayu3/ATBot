@@ -1,16 +1,31 @@
 const Discord = require('discord.js');
 const Twit = require('twit');
 const fs = require('fs');
-const supporterSearch = require("./supporterSearch.js")
+const supporterSearch = require("./supporterSearch.js");
+const request = require('request');
 require('dotenv').config();
 
 
+const url = "https://aayu3.github.io/ATBotJSONDependencies/supporters.json";
+let options = {json: true};
+
+
+var supporters = [];
+request(url, options, (error, res, body) => {
+    if (error) {
+        return  console.log(error)
+    };
+
+    if (!error && res.statusCode == 200) {
+        supporters = body;
+    };
+});
+
 //get files ready
-let supporterPath = "supporter_json";
-let supporterJSONs = fs.readdirSync(supporterPath);
-const supporters = supporterSearch.parseJSON(supporterJSONs);
-
-
+/*
+let rawdata = fs.readFileSync("supporters.json");
+supporters = JSON.parse(rawdata);
+*/
 const prefix = "!";
 const adminID = 817548398453325864;
 const moderatorID = 817631086673788938;
@@ -266,7 +281,7 @@ client.on('message', (msg) => {
         } else if (filteredSups.length == 1) {
           let sup = filteredSups[0];
           msg.channel.send(supporterSearch.printSupporter(sup));
-          msg.channel.send({files: [sup.Awakened + ".png"]});
+          msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/supporter_images/" + sup.Awakened + ".png");
         } else {
           let strings = supporterSearch.printMultiSupporters(filteredSups);
           for (var i = 0; i < strings.length; i++) {
@@ -282,7 +297,7 @@ client.on('message', (msg) => {
       } else {
         let sup = supporterSearch.searchByNumber(num + 1, supporters);
         msg.channel.send(supporterSearch.printSupporter(sup));
-        msg.channel.send({files: [sup.Awakened + ".png"]});
+        msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/supporter_images/" + sup.Awakened + ".png");
       }
     }
   }
