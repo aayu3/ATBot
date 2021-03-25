@@ -252,18 +252,30 @@ client.on('message', (msg) => {
   if (messageContents[0] == "search") {
     if (isNaN(parseInt(messageContents[1]))) {
       // In this case the person is searching by name
-      let filteredSups = supporterSearch.filterByName(messageContents[1], supporters);
-      if (filteredSups.length == 0) {
-        msg.reply("There is no supporter with the name: " + messageContents[1]);
-      } else if (filteredSups.length == 1) {
-        let sup = filteredSups[0];
-        msg.channel.send(supporterSearch.printSupporter(sup));
-        msg.channel.send({files: [sup.Awakened + ".png"]});
+      if (messageContents[1].toLowerCase() == "all") {
+        let all = supporterSearch.printMultiSupporters(supporters);
+        for (var i = 0; i < all.length; i++) {
+          msg.channel.send(all[i]);
+        }
       } else {
-        let strings = supporterSearch.printMultiSupporters(filteredSups);
-        console.log(strings);
-        for (var i = 0; i < strings.length; i++) {
-          msg.channel.send(strings[i]);
+        let filteredSups = supporterSearch.filterByName(messageContents[1], supporters);
+        console.log(filteredSups.length);
+        for (var i = 0; i < filteredSups.length; i++) {
+          console.log(filteredSups[i].Name);
+        }
+        if (filteredSups.length == 0) {
+          msg.reply("There is no supporter with the name: " + messageContents[1]);
+        } else if (filteredSups.length == 1) {
+          let sup = filteredSups[0];
+          console.log(sup.name);
+          msg.channel.send(supporterSearch.printSupporter(sup));
+          msg.channel.send({files: [sup.Awakened + ".png"]});
+        } else {
+          let strings = supporterSearch.printMultiSupporters(filteredSups);
+          console.log(strings.length);
+          for (var i = 0; i < strings.length; i++) {
+            msg.channel.send(strings[i]);
+          }
         }
       }
     } else {

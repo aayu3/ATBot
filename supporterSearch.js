@@ -68,10 +68,11 @@ module.exports = {
     },
 
     printMultiSupporters: function(supporters) {
-        let strs = []
+        let strs = [];
         str = "";
         for (var i = 0; i < supporters.length; i++) {
-            if (str.length < 2000 && str.length > 1900) {
+            if (str.length <= 2000 && str.length >= 1950) {
+                str = str.substring(0, str.length - 1);
                 strs.push(str);
                 str = "";
             }
@@ -98,7 +99,7 @@ module.exports = {
             }
             str = str + "\n";
         }
-        str = str.substring(0, str.length - 1);
+        strs.push(str);
         return strs;
     },
 
