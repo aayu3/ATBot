@@ -71,7 +71,7 @@ module.exports = {
         let strs = [];
         str = "";
         for (var i = 0; i < supporters.length; i++) {
-            if (str.length <= 2000 && str.length >= 1950) {
+            if (str.length <= 2000 && str.length >= 1900) {
                 str = str.substring(0, str.length - 1);
                 strs.push(str);
                 str = "";
@@ -123,7 +123,40 @@ module.exports = {
         let filtered = [];
         for (var i = 0; i < supporters.length; i++) {
             let sup = supporters[i];
-            if (sup.Rarity.toLowerCase().includes(rarity.toLowerCase())) {
+            if (sup.Rarity.toLowerCase() === rarity.toLowerCase()) {
+                filtered.push(sup);
+            }
+        }
+        return filtered;
+    },
+
+    filterByRarity: function(rarity, supporters) {
+        let filtered = [];
+        for (var i = 0; i < supporters.length; i++) {
+            let sup = supporters[i];
+            if (sup.Rarity.toLowerCase() === rarity.toLowerCase()) {
+                filtered.push(sup);
+            }
+        }
+        return filtered;
+    },
+
+    filterByType: function (type, supporters) {
+        let filtered = [];
+        for (var i = 0; i < supporters.length; i++) {
+            let sup = supporters[i];
+            if (sup.Type.toLowerCase() === type.toLowerCase()) {
+                filtered.push(sup);
+            }
+        }
+        return filtered;
+    },
+    
+    filterBySource: function (source, supporters) {
+        let filtered = [];
+        for (var i = 0; i < supporters.length; i++) {
+            let sup = supporters[i];
+            if (sup.Source.toLowerCase().includes(source.toLowerCase())) {
                 filtered.push(sup);
             }
         }

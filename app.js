@@ -246,7 +246,7 @@ client.on('message', (msg) => {
   }
 });
 
-// Search by number
+// Search by number or name
 client.on('message', (msg) => {
   let messageContents = sanitizeCommand(msg);
   if (messageContents[0] == "search") {
@@ -288,6 +288,39 @@ client.on('message', (msg) => {
   }
 });
 
+// filter by source, type, or rarity
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "filter") {
+    let lowered = messageContents[1].toLowerCase();
+    if (lowered === "ur" || lowered === "sr" || lowered == "r") {
+      let filtered = supporterSearch.filterByRarity(lowered, supporters);
+      let messages = supporterSearch.printMultiSupporters(filtered);
+      console.log(messages);
+      for (var i = 0; i < messages.length; i++) {
+        msg.channel.send(messages[i]);
+      }
+    } else if (lowered === "suppress" || lowered === "protect" || lowered == "assist") {
+      let filtered = supporterSearch.filterByType(lowered, supporters);
+      let messages = supporterSearch.printMultiSupporters(filtered);
+      console.log(messages);
+      for (var i = 0; i < messages.length; i++) {
+        msg.channel.send(messages[i]);
+      }
+    } else {
+      let filtered = supporterSearch.filterBySource(lowered, supporters);
+      if (filtered.length == 0) {
+        msg.reply("Please use a valid filter argument:\n**Rarity:**\nUR\nSR\nR\n**Type:**\nSuppress\nProtect\nAssist\nOr provide an source.")
+      } else {
+        let messages = supporterSearch.printMultiSupporters(filtered);
+        console.log(messages);
+        for (var i = 0; i < messages.length; i++) {
+          msg.channel.send(messages[i]);
+        }
+      }
+    }
+  }
+});
 
 
 // Token Change
