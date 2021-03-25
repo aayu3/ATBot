@@ -1,0 +1,15 @@
+{
+    "Name" : "Shiina Sakurako",
+    "Number" : 21,
+    "Type" : "Assist",
+    "Rarity" : "R",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/021_0",
+    "Awakened" : "/supporter_images/021_1",
+    "SubSkillName" : "Paper Sense",
+    "SubSkill" : "Enemies are 30% more likely to drop Potions upon death. (Max 60%).",
+    "MainSkillName" : false,
+    "MainSkillActive" : false,
+    "MainSkillPassive" : false,
+    "CD" : false
+  }

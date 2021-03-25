@@ -10,6 +10,6 @@
     "SubSkill" : "Increase damage dealt to Machine-type enemies by 25% (Max 50%).",
     "MainSkillName" : "Evil Eye: Circle Motion",
     "MainSkillActive" : false,
-    "MainSkillPassive" : " Upon being attacked, performs an area attack that deals 55% (Max 110%) of the incoming damage. Every 3rd area attack deals additional damage and knocks back enemies.",
+    "MainSkillPassive" : "Upon being attacked, performs an area attack that deals 55% (Max 110%) of the incoming damage. Every 3rd area attack deals additional damage and knocks back enemies.",
     "CD" : false
   }

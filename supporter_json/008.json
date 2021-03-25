@@ -1,0 +1,15 @@
+{
+    "Name" : "Tekkain Kaworu",
+    "Number" : 8,
+    "Type" : "Assist",
+    "Rarity" : "UR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/008_0",
+    "Awakened" : "/supporter_images/008_1",
+    "SubSkillName" : "Chain of Retribution",
+    "SubSkill" : "Increases critical damage of all attacks by 24% (Max 48%).",
+    "MainSkillName" : "Evil Chain",
+    "MainSkillActive" : "Deals 425% (Max 850%) damage and stuns all enemies. Deals additional damage to enemies if stunned for 3 seconds.",
+    "MainSkillPassive" : false,
+    "CD" : 42
+  }

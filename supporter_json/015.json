@@ -1,0 +1,15 @@
+{
+    "Name" : "Shinjou Yuuna",
+    "Number" : 15,
+    "Type" : "Assist",
+    "Rarity" : "SR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/015_0",
+    "Awakened" : "/supporter_images/015_1",
+    "SubSkillName" : "Agata’s Blood",
+    "SubSkill" : "Increases HP restored from all sources by 30% (Max 60%).",
+    "MainSkillName" : "Swift Tranquility",
+    "MainSkillActive" : "Immediately restores 12% (Max 24%) of your lost HP.",
+    "MainSkillPassive" : false,
+    "CD" : 48
+  }

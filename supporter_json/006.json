@@ -1,0 +1,15 @@
+{
+    "Name" : "Maezono Momoko",
+    "Number" : 6,
+    "Type" : "Assist",
+    "Rarity" : "SR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/006_0",
+    "Awakened" : "/supporter_images/006_1",
+    "SubSkillName" : " Discipline in Action",
+    "SubSkill" : "Increases Particle charge rate over time by 25% (Max 50%).",
+    "MainSkillName" : "Subconscious Manipulation",
+    "MainSkillActive" : "Deals 275% (Max 550%) damage and stuns all enemies.",
+    "MainSkillPassive" : false,
+    "CD" : 33
+  }
