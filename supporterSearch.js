@@ -1,7 +1,7 @@
 const fs = require('fs');
 const request = require('request');
 
-const url = "https://aayu3.github.io/ATBotJSONDependencies/supporter_json/0001.json";
+const url = "https://aayu3.github.io/ATBotJSONDependencies/supporters.json";
 
 let options = {json: true};
 
