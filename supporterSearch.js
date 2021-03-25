@@ -8,6 +8,9 @@ const rareEmote = "<:rare:824486578247172106>";
 const srEmote = "<:SR:824486914065301514>";
 const urEmote = "<:UR:824486578273255424>";
 
+const url = "https://aayu3.github.io/ATBotJSONDependencies/supporter_json/0001.json";
+
+
 // Setting up FS variables
 let supporterPath = "supporter_json";
 let supporterJSONs = fs.readdirSync(supporterPath);
