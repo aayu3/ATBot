@@ -40,7 +40,7 @@
        "SubSkillName":"Wave Art: Guardian",
        "SubSkill":"When HP drops to 0, restores 25% (Max 50%) of maximum HP only once and reduces damage taken from all enemies by 35% (Max 70%) for 12 (Max 24) seconds.",
        "MainSkillName":"Power Engage",
-       "MainSkillActive":"Removes 1 (Max 2) debuffs, stuns, and groggy; becomes invulnerable for 8 (Max 16) seconds.",
+       "MainSkillActive":"Removes 1 (Max 3) debuffs, stuns, and groggy; becomes invulnerable for 8 (Max 16) seconds.",
        "MainSkillPassive":false,
        "CD":51
     },
@@ -165,7 +165,7 @@
        "CD":false
     },
     {
-       "Name":"Major ",
+       "Name":"Major",
        "Number":12,
        "Type":"Suppress",
        "Rarity":"UR",
@@ -473,7 +473,7 @@
        "Unawakened":"032_0",
        "Awakened":"032_1",
        "SubSkillName":"Shady Pharmacist",
-       "SubSkill":"Increases HP restored from all sources by 31% (Max 64%)",
+       "SubSkill":"Increases HP restored from all sources by 32% (Max 64%)",
        "MainSkillName":"Nether Blossom",
        "MainSkillActive":"Deals 330% (max 660%) damage and stuns all enemies within close range; immediately restores 14% (max 28%) of your lost HP",
        "MainSkillPassive":false,
@@ -520,7 +520,7 @@
        "SubSkillName":"Playful Punisher",
        "SubSkill":"Increases damage dealt to snared enemies by 15% (Max 30%).",
        "MainSkillName":"Shadow Art: Dual Dervish ",
-       "MainSkillActive":"Conjures shadow thorns that snare all enemies for 5 (Max 10) seconds; gains more Particles from normal attacks for the duration.",
+       "MainSkillActive":"Conjures shadow thorns that snare all enemies for 5 (Max 8) seconds; gains more Particles from normal attacks for the duration.",
        "MainSkillPassive":false,
        "CD":60
     },
@@ -610,7 +610,7 @@
        "SubSkillName":"Apprentice Medic",
        "SubSkill":"Increases HP restored from all sources by 18% (Max 36%); Enemies are 16% (Max 32%) more likely to drop Potions upon death.",
        "MainSkillName":"Ninja Art: Healing Hands",
-       "MainSkillActive":"Removes 1 debuff, immediately restores 14% (Max 28%) of your lost HP.",
+       "MainSkillActive":"Removes 1 (Max 3) debuff, immediately restores 14% (Max 28%) of your lost HP.",
        "MainSkillPassive":false,
        "CD":61
     },
