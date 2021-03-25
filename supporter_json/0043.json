@@ -1,0 +1,15 @@
+{
+    "Name" : "Kasahara Tatsumi",
+    "Number" : 43,
+    "Type" : "Assist",
+    "Rarity" : "UR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/043_0",
+    "Awakened" : "/supporter_images/043_1",
+    "SubSkillName" : "Ippon-Datara",
+    "SubSkill" : "Increases damage dealt to Demon-type enemies by 12% (Max 24%); Increases damage dealt to Human-type enemies by 12% (Max 24%)",
+    "MainSkillName" : "Ameno-Ma-Hitotsu",
+    "MainSkillActive" : "Deals 315% (Max 630%) damage to all enemies in the area, and disarms them for 4 (Max 8) seconds.",
+    "MainSkillPassive" : false,
+    "CD" : 53
+  }

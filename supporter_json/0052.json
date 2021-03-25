@@ -1,0 +1,15 @@
+{
+    "Name" : "Felicia",
+    "Number" : 52,
+    "Type" : "Surpress",
+    "Rarity" : "UR",
+    "Source" : "Event: Felicia's Prank",
+    "Unawakened" : "/supporter_images/052_0",
+    "Awakened" : "/supporter_images/052_1",
+    "SubSkillName" : "Prime Bloodline",
+    "SubSkill" : "Increases damage dealt to Human-type enemies by 9% (Max: 18%); restores 1% (Max: 2%) of lost HP every 3 seconds for 15 minutes upon scoring a critical hit",
+    "MainSkillName" : "Scythe of Punishment",
+    "MainSkillActive" : "Deals 238% (Max: 476%) damage to all enemies within the area; inflicts Bleed that deals 238% (Max: 476%) damage against Human-type enemies for 7.5 seconds",
+    "MainSkillPassive" : false,
+    "CD" : 48
+  }

@@ -1,0 +1,15 @@
+{
+    "Name" : "Tekkain Koharu",
+    "Number" : 51,
+    "Type" : "Protect",
+    "Rarity" : "UR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/051_0",
+    "Awakened" : "/supporter_images/051_1",
+    "SubSkillName" : "Elec Art: Glitch",
+    "SubSkill" : "Increases damage dealt to Machine-type enemies by 12% (Max 24%); enemies are 35% (Max 70%) more likely to drop Particles upon death",
+    "MainSkillName" : "Elec Art: Display",
+    "MainSkillActive" : "Deals 255% (Max 510%) damage to all enemies; reduces speed of Machine-type enemies by 75% (Max 150%) for 8 seconds.",
+    "MainSkillPassive" : false,
+    "CD" : 51
+  }

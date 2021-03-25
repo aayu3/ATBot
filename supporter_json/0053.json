@@ -1,0 +1,15 @@
+{
+    "Name" : "[Draconic] Su Jinglei",
+    "Number" : 53,
+    "Type" : "Assist",
+    "Rarity" : "UR",
+    "Source" : "Limited Gacha",
+    "Unawakened" : "/supporter_images/053_0",
+    "Awakened" : "/supporter_images/053_1",
+    "SubSkillName" : "Dragon Lady",
+    "SubSkill" : "Increases melee attack damage by 2% (Max 4%) for 5 seconds (stacks up to 10 times, loses all stacks upon being attacked). Reduces damage taken from Demon-type enemies by 10% (Max 20%).",
+    "MainSkillName" : "Beast Art: Ryuuhajin",
+    "MainSkillActive" : "Sends a black draconic wave ahead to deal 400% (Max 800%) damage and to remove the enemy’s Super Armor (not applied in Arena)",
+    "MainSkillPassive" : "Basic melee attacks give a 15% chance of gaining Super Armor for 1 second (Max 2 seconds).",
+    "CD" : 40
+  }
