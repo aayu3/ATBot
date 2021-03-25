@@ -191,6 +191,20 @@ client.on('message', (msg) => {
   }
 });
 
+// get emote as string function
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "getEmote") {
+    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
+      messageContents.shift();
+      let name = messageContents.join(' ');
+      msg.reply("The emote is: ```" + name + "```");
+    } else {
+      msg.reply("You do not have sufficient permission to use this command.")
+    }
+  }
+});
+
 // change avatar function
 client.on('message', (msg) => {
   let messageContents = sanitizeCommand(msg);
