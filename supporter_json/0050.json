@@ -1,0 +1,15 @@
+{
+    "Name" : "Laetitia Bellmer",
+    "Number" : 50,
+    "Type" : "Assist",
+    "Rarity" : "UR",
+    "Source" : "Event: The Spider Princess and The Aqua Mistress",
+    "Unawakened" : "/supporter_images/050_0",
+    "Awakened" : "/supporter_images/050_1",
+    "SubSkillName" : "UFS Extranormal",
+    "SubSkill" : "Increases damage dealt to enemies with buffs by 16% (Max 32%)",
+    "MainSkillName" : "Aqua Mistress",
+    "MainSkillActive" : "Removes 1 (Max 3) debuff; deals 234% (Max 468%) damage and knocks up up to 3 enemies into the air.",
+    "MainSkillPassive" : false,
+    "CD" : 51
+  }

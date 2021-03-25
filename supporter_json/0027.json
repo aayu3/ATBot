@@ -1,0 +1,15 @@
+{
+    "Name" : "Harusaki Arika",
+    "Number" : 27,
+    "Type" : "Supress",
+    "Rarity" : "SR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/027_0",
+    "Awakened" : "/supporter_images/027_1",
+    "SubSkillName" : "Singular Point",
+    "SubSkill" : "Increases damage dealt to bosses by 15% (Max 30%)",
+    "MainSkillName" : "Gravitational Pull",
+    "MainSkillActive" : "Performs a consecutive attack of 30% (Max 60%) damage to all enemies pulled by the sphere. The sphere explodes after 3 seconds for additional damage.",
+    "MainSkillPassive" : false,
+    "CD" : 36
+  }

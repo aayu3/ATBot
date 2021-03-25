@@ -1,0 +1,15 @@
+{
+    "Name" : "Yuri Hisui",
+    "Number" : 26,
+    "Type" : "Assist",
+    "Rarity" : "UR",
+    "Source" : "Standard Gacha",
+    "Unawakened" : "/supporter_images/026_0",
+    "Awakened" : "/supporter_images/026_1",
+    "SubSkillName" : "Eclipse Meld: Connect",
+    "SubSkill" : "Reduces damage taken from bosses by 20% (Max 40%)",
+    "MainSkillName" : "Main Skill: Eclipse Meld: Roar",
+    "MainSkillActive" : "Remove all combos; increases damage dealt and critical damage by 1% (Max 2%) for 10 seconds",
+    "MainSkillPassive" : false,
+    "CD" : 48
+  }
