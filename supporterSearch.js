@@ -58,22 +58,26 @@ module.exports = {
         // Source Formatting
         strRep = strRep + "\n**Source:** " + supporter.Source;
 
+        // Check for Sub Skill then format it
+        if (supporter.SubSkillName) {
+            strRep = strRep + "\n**__Sub Skill: " + supporter.SubSkillName + "__**";
+            strRep = strRep + "\n*" + supporter.SubSkill + "*"; 
+        }
+
         // Check for Main Skill then format it
         if (supporter.MainSkillName) {
-            strRep = strRep + "\n**Lead Skill: __" + supporter.MainSkillName + "__**";
+            strRep = strRep + "\n**__Lead Skill: " + supporter.MainSkillName + "__**";
             if (supporter.CD) {
-                strRep = strRep + "\n**Active Skill:**\n" + "*" + supporter.MainSkillActive + "*";
+                strRep = strRep + "\n**Active Skill:** " + "*" + supporter.MainSkillActive + "*";
                 strRep = strRep + "\n**Cooldown:** " + supporter.CD + " seconds";
             }
             if (supporter.MainSkillPassive) {
-                strRep = strRep + "\n**Passive Skill:**\n" + "*" + supporter.MainSkillPassive + "*";
+                strRep = strRep + "\n**Passive Skill:** " + "*" + supporter.MainSkillPassive + "*";
             }
+        } else {
+            strRep = strRep + "\n**This supporter has no activated skill.**"
         }
-        // Check for Sub Skill then format it
-        if (supporter.SubSkillName) {
-            strRep = strRep + "\n**Sub Skill:** __" + supporter.SubSkillName + "__";
-            strRep = strRep + "\n*" + supporter.SubSkill + "*"; 
-        }
+        
         return strRep
     },
 
