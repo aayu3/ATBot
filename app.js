@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
-const Twit = require('twit');
 const fs = require('fs');
 const supporterSearch = require("./supporterSearch.js");
 const request = require('request');
+const cheerio = require('cheerio');
 require('dotenv').config();
 
 
