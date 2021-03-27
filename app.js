@@ -273,11 +273,13 @@ client.on('message', (msg) => {
           msg.channel.send(all[i]);
         }
       } else {
-        let filteredSups = supporterSearch.filterByName(messageContents[1], supporters);
+        let searchTerms = messageContents.shift();
+        let searchName = messageContents.join(" ");
+        let filteredSups = supporterSearch.filterByName(searchName, supporters);
         for (var i = 0; i < filteredSups.length; i++) {
         }
         if (filteredSups.length == 0) {
-          msg.reply("There is no supporter with the name: " + messageContents[1]);
+          msg.reply("There is no supporter with the name: " + searchName);
         } else if (filteredSups.length == 1) {
           let sup = filteredSups[0];
           msg.channel.send(supporterSearch.printSupporter(sup));
