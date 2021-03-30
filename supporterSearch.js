@@ -68,11 +68,13 @@ module.exports = {
         if (supporter.MainSkillName) {
             strRep = strRep + "\n**__Lead Skill: " + supporter.MainSkillName + "__**";
             if (supporter.CD) {
-                strRep = strRep + "\n**Active Skill:** " + "*" + supporter.MainSkillActive + "*";
-                strRep = strRep + "\n**Cooldown:** " + supporter.CD + " seconds";
+                strRep = strRep + " **CD:** " + supporter.CD + "s";  
             }
             if (supporter.MainSkillPassive) {
                 strRep = strRep + "\n**Passive Skill:** " + "*" + supporter.MainSkillPassive + "*";
+            }
+            if (supporter.CD) {
+                strRep = strRep + "\n**Active Skill:** " + "*" + supporter.MainSkillActive + "*";
             }
         } else {
             strRep = strRep + "\n**This supporter has no activated skill.**"
