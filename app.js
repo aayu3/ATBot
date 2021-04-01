@@ -10,8 +10,17 @@ const url = "https://aayu3.github.io/ATBotJSONDependencies/supporters.json";
 let options = {json: true};
 
 
+var supporters = [];
+request(url, options, (error, res, body) => {
+    if (error) {
+        return  console.log(error)
+    };
 
-
+    if (!error && res.statusCode == 200) {
+        supporters = body;
+    };
+});
+console.log(supporters);
 //get files ready
 /*
 let rawdata = fs.readFileSync("supporters.json");
@@ -262,16 +271,6 @@ client.on('message', (msg) => {
 
 // Search by number or name
 client.on('message', (msg) => {
-  var supporters = [];
-  request(url, options, (error, res, body) => {
-      if (error) {
-          return  console.log(error)
-      };
-
-      if (!error && res.statusCode == 200) {
-          supporters = body;
-      };
-  });
   let messageContents = sanitizeCommand(msg);
   if (messageContents[0] == "search") {
     if (isNaN(parseInt(messageContents[1]))) {
@@ -316,16 +315,6 @@ client.on('message', (msg) => {
 
 // filter by source, type, or rarity
 client.on('message', (msg) => {
-  var supporters = [];
-  request(url, options, (error, res, body) => {
-      if (error) {
-          return  console.log(error)
-      };
-
-      if (!error && res.statusCode == 200) {
-          supporters = body;
-      };
-  });
   let messageContents = sanitizeCommand(msg);
   if (messageContents[0] == "filter") {
     // If there is only one argument
