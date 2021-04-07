@@ -347,6 +347,12 @@ client.on('message', (msg) => {
         for (var i = 0; i < messages.length; i++) {
           msg.channel.send(messages[i]);
         }
+      } else if (lowered === "released" || lowered === "unreleased" ) {
+        let filtered = supporterSearch.filterByStatus(lowered, supporters);
+        let messages = supporterSearch.printMultiSupporters(filtered);
+        for (var i = 0; i < messages.length; i++) {
+          msg.channel.send(messages[i]);
+        }
       } else {
         let filtered = supporterSearch.filterBySource(lowered, supporters);
         if (filtered.length == 0) {
@@ -358,7 +364,7 @@ client.on('message', (msg) => {
           }
         }
       }
-    } else if (messageContents.length > 4) {
+    } else if (messageContents.length > 5) {
         msg.reply("There are too many arguments.")
       } else {
         let filtered = supporters;
@@ -368,7 +374,10 @@ client.on('message', (msg) => {
             filtered = supporterSearch.filterByRarity(lowered, filtered);
           } else if (lowered === "suppress" || lowered === "protect" || lowered == "assist") {
             filtered = supporterSearch.filterByType(lowered, filtered);
-          } else {
+          } else if (lowered === "released" || lowered === "unreleased") {
+            filtered = supporterSearch.filterByStatus(lowered, filtered);
+          }
+           else {
             filtered = supporterSearch.filterBySource(lowered, filtered);
             if (filtered.length == 0) {
               msg.reply("Please use a valid filter argument:\n**Rarity:**\nUR\nSR\nR\n**Type:**\nSuppress\nProtect\nAssist\nOr provide an source.")

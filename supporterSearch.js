@@ -58,6 +58,9 @@ module.exports = {
         // Source Formatting
         strRep = strRep + "\n**Source:** " + supporter.Source;
 
+        // Status Formatting
+        strRep = strRep + "\n**Status:** " + supporter.Status;
+
         // Check for Sub Skill then format it
         if (supporter.SubSkillName) {
             strRep = strRep + "\n**__Sub Skill: " + supporter.SubSkillName + "__**";
@@ -135,11 +138,11 @@ module.exports = {
         return filtered;
     },
 
-    filterByRarity: function(rarity, supporters) {
+    filterByStatus: function(rarity, supporters) {
         let filtered = [];
         for (var i = 0; i < supporters.length; i++) {
             let sup = supporters[i];
-            if (sup.Rarity.toLowerCase() === rarity.toLowerCase()) {
+            if (sup.Status.toLowerCase() === rarity.toLowerCase()) {
                 filtered.push(sup);
             }
         }
