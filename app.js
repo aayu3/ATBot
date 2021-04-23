@@ -273,7 +273,7 @@ client.on('message', (msg) => {
 client.on('message', (msg) => {
   let messageContents = sanitizeCommand(msg);
   if (messageContents[0] == "guide") {
-    msg.reply("Here is the beginner's guide: https://docs.google.com/document/d/1vp7dQbI2MctLCaLcLB9zbKtKCiXbTm9ArWfsypd4qQs/view");
+    msg.reply("Here is the beginner's guide: https://aayu3.github.io/ATBotJSONDependencies/beginner_guide.html");
   }
 });
 
