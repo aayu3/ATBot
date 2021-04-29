@@ -273,7 +273,15 @@ client.on('message', (msg) => {
 client.on('message', (msg) => {
   let messageContents = sanitizeCommand(msg);
   if (messageContents[0] == "guide") {
-    msg.reply("Here is the beginner's guide: https://aayu3.github.io/ATBotJSONDependencies/beginner_guide.html");
+    msg.reply("Here is the beginner's guide: http://actiontaiman.in/beginner_guide.html");
+  }
+});
+
+// reroll command
+client.on('message', (msg) => {
+  let messageContents = sanitizeCommand(msg);
+  if (messageContents[0] == "reroll") {
+    msg.reply("Here is the beginner's guide: http://actiontaiman.in/reroll_guide.html");
   }
 });
 
