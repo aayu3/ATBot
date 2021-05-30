@@ -281,7 +281,7 @@ client.on('message', (msg) => {
 client.on('message', (msg) => {
   let messageContents = sanitizeCommand(msg);
   if (messageContents[0] == "reroll") {
-    msg.reply("Here is the beginner's guide: http://actiontaiman.in/reroll_guide.html");
+    msg.reply("Here is the reroll guide: http://actiontaiman.in/reroll_guide.html");
   }
 });
 
@@ -346,30 +346,54 @@ client.on('message', (msg) => {
       if (lowered === "ur" || lowered === "sr" || lowered == "r") {
         let filtered = supporterSearch.filterByRarity(lowered, supporters);
         let messages = supporterSearch.printMultiSupporters(filtered);
+        console.log("messages: ");
+        console.log(messages);
+        if (messages[0] === "") {
+          msg.channel.send("There are no supporters that fit these requirements.");
+        } else {
         for (var i = 0; i < messages.length; i++) {
+        
           msg.channel.send(messages[i]);
         }
+      }
       } else if (lowered === "suppress" || lowered === "protect" || lowered == "assist") {
         let filtered = supporterSearch.filterByType(lowered, supporters);
         let messages = supporterSearch.printMultiSupporters(filtered);
+        console.log("messages: ");
+        console.log(messages);
+        if (messages[0] === "") {
+          msg.channel.send("There are no supporters that fit these requirements.");
+        } else {
+          
         for (var i = 0; i < messages.length; i++) {
           msg.channel.send(messages[i]);
         }
+      }
       } else if (lowered === "released" || lowered === "unreleased" ) {
         let filtered = supporterSearch.filterByStatus(lowered, supporters);
         let messages = supporterSearch.printMultiSupporters(filtered);
+        console.log("messages: ");
+        console.log(messages);
+        if (messages[0] === "") {
+          msg.channel.send("There are no supporters that fit these requirements.");
+        } else {
         for (var i = 0; i < messages.length; i++) {
           msg.channel.send(messages[i]);
         }
+      }
       } else {
         let filtered = supporterSearch.filterBySource(lowered, supporters);
         if (filtered.length == 0) {
           msg.reply("Please use a valid filter argument:\n**Rarity:**\nUR\nSR\nR\n**Type:**\nSuppress\nProtect\nAssist\nOr provide an source.")
         } else {
           let messages = supporterSearch.printMultiSupporters(filtered);
+          if (messages[0] === "") {
+            msg.channel.send("There are no supporters that fit these requirements.");
+          } else {
           for (var i = 0; i < messages.length; i++) {
             msg.channel.send(messages[i]);
           }
+        }
         }
       }
     } else if (messageContents.length > 5) {
@@ -393,9 +417,20 @@ client.on('message', (msg) => {
           }
         }
         let messages = supporterSearch.printMultiSupporters(filtered);
-        for (var i = 0; i < messages.length; i++) {
-          msg.channel.send(messages[i]);
+        console.log("messages: ");
+        console.log(messages);
+        if (messages[0] === "") {
+          msg.channel.send("There are no supporters that fit these requirements.");
+        } else {
+          console.log(messages);
+          for (var i = 0; i < messages.length; i++) {
+            if (messages[i].length == 0) {
+              msg.channel.send("There are no supporters that fit these requirements.");
+            }
+            msg.channel.send(messages[i]);
+          }
         }
+        
     }  
   }
 });
