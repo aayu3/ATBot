@@ -71,7 +71,12 @@ module.exports = {
                     strRep = strRep + "\n**Particle Cost: **" + particleEmote + " x " + Math.floor(weapon.Particle/100);
                 }
                 description = description.replace(/ *\[[^\]]*]/g, ' ');
-                strRep = strRep + "\n**Skill Description: **" + description;
+                description = description.trim();
+                description = description.split("  ").join(" ");
+                description = description.split("Passive : ").join("**Passive:** ");
+                description = description.split(" Active : ").join("**Active:** ");
+                console.log(description);
+                strRep = strRep + "\n**__Skill Description: __**\n" + description ;
 
             }
         }

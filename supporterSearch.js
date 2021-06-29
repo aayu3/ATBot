@@ -39,7 +39,7 @@ module.exports = {
         // Name and Rarity Formatting
         let strRep = "**No. " + supporter.Number;
         strRep = strRep + " __" + supporter.Name + "__** \n**Rarity:** ";
-        if (supporter.Rarity === "R") {
+        if (supporter.Rarity === "Rare") {
             strRep = strRep + rareEmote;
         } else if (supporter.Rarity == "SR") {
             strRep = strRep + srEmote;
@@ -58,13 +58,13 @@ module.exports = {
         // Source Formatting
         strRep = strRep + "\n**Source:** " + supporter.Source;
 
-        // Status Formatting
-        strRep = strRep + "\n**Status:** " + supporter.Status;
-
         // Check for Sub Skill then format it
-        if (supporter.SubSkillName) {
-            strRep = strRep + "\n**__Sub Skill: " + supporter.SubSkillName + "__**";
-            strRep = strRep + "\n*" + supporter.SubSkill + "*"; 
+        if (supporter.SkillName) {
+            strRep = strRep + "\n**__Sub Skill: " + supporter.SkillName + "__**";
+            let description = supporter.SkillDescription;
+            description = description.replace(/ *\[[^\]]*]/g, ' ');
+            description = description.trim();
+            strRep = strRep + "\n" + description + ""; 
         }
 
         // Check for Main Skill then format it
@@ -73,12 +73,14 @@ module.exports = {
             if (supporter.CD) {
                 strRep = strRep + " **CD:** " + supporter.CD + "s";  
             }
-            if (supporter.MainSkillPassive) {
-                strRep = strRep + "\n**Passive Skill:** " + "*" + supporter.MainSkillPassive + "*";
-            }
-            if (supporter.CD) {
-                strRep = strRep + "\n**Active Skill:** " + "*" + supporter.MainSkillActive + "*";
-            }
+            let description = supporter.MainSkillDescription;
+            description = description.replace(/ *\[[^\]]*]/g, ' ');
+            description = description.trim();
+            description = description.split('Passive : ').join('**Passive:** ');
+            description = description.split(' Active : ').join('**Active:** ');
+            console.log(description);
+            strRep = strRep + "\n" + description + "";
+            
         } else {
             strRep = strRep + "\n**This supporter has no activated skill.**"
         }
@@ -97,7 +99,7 @@ module.exports = {
             }
             let sup = supporters[i];
             // add rarity at front
-            if (sup.Rarity === "R") {
+            if (sup.Rarity === "Rare") {
                 str = str + rareEmote;
             } else if (sup.Rarity == "SR") {
                 str = str + srEmote;
@@ -131,20 +133,11 @@ module.exports = {
         let filtered = [];
         for (var i = 0; i < supporters.length; i++) {
             let sup = supporters[i];
+            if (sup.hasOwnProperty("Name")) {
             if (sup.Name.toLowerCase().includes(str.toLowerCase())) {
                 filtered.push(sup);
             }
         }
-        return filtered;
-    },
-
-    filterByStatus: function(rarity, supporters) {
-        let filtered = [];
-        for (var i = 0; i < supporters.length; i++) {
-            let sup = supporters[i];
-            if (sup.Status.toLowerCase() === rarity.toLowerCase()) {
-                filtered.push(sup);
-            }
         }
         return filtered;
     },
@@ -153,9 +146,11 @@ module.exports = {
         let filtered = [];
         for (var i = 0; i < supporters.length; i++) {
             let sup = supporters[i];
+            if (sup.hasOwnProperty("Rarity")) {
             if (sup.Rarity.toLowerCase() === rarity.toLowerCase()) {
                 filtered.push(sup);
             }
+        }
         }
         return filtered;
     },
@@ -164,9 +159,11 @@ module.exports = {
         let filtered = [];
         for (var i = 0; i < supporters.length; i++) {
             let sup = supporters[i];
+            if (sup.hasOwnProperty("Type")) {
             if (sup.Type.toLowerCase() === type.toLowerCase()) {
                 filtered.push(sup);
             }
+        }
         }
         return filtered;
     },
@@ -175,9 +172,11 @@ module.exports = {
         let filtered = [];
         for (var i = 0; i < supporters.length; i++) {
             let sup = supporters[i];
+            if (sup.hasOwnProperty("Source")) {
             if (sup.Source.toLowerCase().includes(source.toLowerCase())) {
                 filtered.push(sup);
             }
+        }
         }
         return filtered;
     }

@@ -50,18 +50,6 @@ const client = new Discord.Client({
   partials: ['MESSAGE', 'REACTION', 'CHANNEL'],
 });
 
-// Get names of emotes from taimanin_emotes so the bot can search for them
-let emotePath = "taimanin_emotes";
-let emoteNames = fs.readdirSync(emotePath);
-
-function searchEmoteInArray (str, strArray) {
-  for (var j=0; j<strArray.length; j++) {
-      if (strArray[j] === str + ".png") {
-        return j;
-      }
-  }
-  return -1;
-}
 
 // function to sanitize msgs and return an array of commands and arguments
 // returns 0 if the message is not a command
@@ -93,19 +81,8 @@ function getMemberFromMention(msg) {
 }
 
 
-//Emote List Embed
-const emotesEmbed = new Discord.MessageEmbed()
-                      .setColor('#0099ff')
-                      .setTitle('Emotes');
 
-function addEmoteNamesToEmbed(emotes, embed, messageStart, messageEnd) {
-  embed.fields = [];
-  let commands = emotes[messageStart].split(".")[0];
-  for (var j=messageStart+1; j<messageEnd; j++) {
-    commands = commands + "\n" + emotes[j].split(".")[0];
-  }
-  embed.addField("Commands: ", commands);
-}
+
 
 
 client.login(process.env.BOT_TOKEN);
@@ -114,30 +91,9 @@ client.on('ready', () => {
   console.log('The Bot is ready!')
 });
 
-// Search for emote name and replace with image
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  let result = searchEmoteInArray(messageContents[0], emoteNames);
-  if (result !== -1) {
-    const channel = msg.channel;
-    channel.send({files: ["taimanin_emotes/" + emoteNames[result]]});
-    console.log(emoteNames[result]);
-    msg.delete();
-  }
-});
 
-// list emote command
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "emotes") {
-    const channel = msg.channel;
-    addEmoteNamesToEmbed(emoteNames,emotesEmbed,0,6);
-    channel.send(emotesEmbed).then(sentEmbed => {
-    sentEmbed.react("⬅")
-    sentEmbed.react("➡")
-    });
-  }
-});
+
+
 
 // list emote command
 client.on('message', (msg) => {
@@ -150,7 +106,7 @@ client.on('message', (msg) => {
 client.on('message', (msg) => {
   let messageContents = sanitizeCommand(msg);
   if (messageContents[0] == "commands") {
-    msg.reply("__**Supporters**__\n!supporter [Name/Number]\n!filtersup [Rarity/Status/Type/Source]\n!intimacy [Name]\n__**Weapons**__\n!weapon [Name/Number]\n!filterwep [Rarity/Source]\n!weaponchar [Character]\n__**Guides**__\n!guide (For Beginner's Guide)\n!reroll (For Reroll Guide)");
+    msg.reply("__**Supporters**__\n!supporter [Name/Number]\n!filtersup [Rarity/Type/Source]\n!intimacy [Name]\n__**Weapons**__\n!weapon [Name/Number]\n!filterwep [Rarity/Source]\n!weaponchar [Character]\n__**Guides**__\n!guide (For Beginner's Guide)\n!reroll (For Reroll Guide)");
     }
 });
 
@@ -319,7 +275,7 @@ client.on('message', (msg) => {
           msg.reply("There is no supporter with the name: " + searchName);
         } else if (filteredSups.length == 1) {
           let sup = filteredSups[0];
-          msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/intimacy_images/Supporter_" + sup.Unawakened + ".png");
+          msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/intimacy_images/" + sup.Icon + "_0.png");
         } else {
           msg.reply("Please be more specific")
         } 
@@ -331,7 +287,7 @@ client.on('message', (msg) => {
           msg.reply("Please provide a number in the correct range: 1 - " + (supporters.length));
         } else {
           let sup = supporterSearch.searchByNumber(num + 1, supporters);
-          msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/intimacy_images/Supporter_" + sup.Unawakened + ".png");
+          msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/intimacy_images/" + sup.Icon + "_0.png");
         }
       }
       
@@ -363,7 +319,7 @@ client.on('message', (msg) => {
           } else if (filteredSups.length == 1) {
             let sup = filteredSups[0];
             msg.channel.send(supporterSearch.printSupporter(sup));
-            msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/supporter_images/" + sup.Awakened + ".png");
+            msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/supporter_images/" + sup.Icon + "_1.png");
           } else {
             let strings = supporterSearch.printMultiSupporters(filteredSups);
             for (var i = 0; i < strings.length; i++) {
@@ -379,7 +335,7 @@ client.on('message', (msg) => {
         } else {
           let sup = supporterSearch.searchByNumber(num + 1, supporters);
           msg.channel.send(supporterSearch.printSupporter(sup));
-          msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/supporter_images/" + sup.Awakened + ".png");
+          msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/supporter_images/" + sup.Icon + "_1.png");
         }
       }
     } else {
@@ -422,18 +378,6 @@ client.on('message', (msg) => {
           msg.channel.send(messages[i]);
         }
       }
-      } else if (lowered === "released" || lowered === "unreleased" ) {
-        let filtered = supporterSearch.filterByStatus(lowered, supporters);
-        let messages = supporterSearch.printMultiSupporters(filtered);
-
-
-        if (messages[0] === "") {
-          msg.channel.send("There are no supporters that fit these requirements.");
-        } else {
-        for (var i = 0; i < messages.length; i++) {
-          msg.channel.send(messages[i]);
-        }
-      }
       } else {
         let filtered = supporterSearch.filterBySource(lowered, supporters);
         if (filtered.length == 0) {
@@ -459,10 +403,7 @@ client.on('message', (msg) => {
             filtered = supporterSearch.filterByRarity(lowered, filtered);
           } else if (lowered === "suppress" || lowered === "protect" || lowered == "assist") {
             filtered = supporterSearch.filterByType(lowered, filtered);
-          } else if (lowered === "released" || lowered === "unreleased") {
-            filtered = supporterSearch.filterByStatus(lowered, filtered);
-          }
-           else {
+          } else {
             filtered = supporterSearch.filterBySource(lowered, filtered);
             if (filtered.length == 0) {
               msg.reply("Please use a valid filter argument:\n**Rarity:**\nUR\nSR\nR\n**Type:**\nSuppress\nProtect\nAssist\nOr provide an source.")
