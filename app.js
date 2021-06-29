@@ -3,7 +3,6 @@ const fs = require('fs');
 const supporterSearch = require("./supporterSearch.js");
 const weaponSearch = require("./weaponSearch.js")
 const request = require('request');
-const cheerio = require('cheerio');
 require('dotenv').config();
 
 const characters = ["igawa asagi", "igawa sakura", "mizuki yukikaze", "akiyama rinko", "mizuki shiranui", "yatsu murasaki", "emily simmons", "su jinglei", "koukawa oboro", "shinganji kurenai", "loukawa asuka", "onisaki kirara", "ingrid"];
@@ -39,7 +38,7 @@ request(weaponurl, options, (error, res, body) => {
 let rawdata = fs.readFileSync("supporters.json");
 supporters = JSON.parse(rawdata);
 */
-const prefix = "!";
+
 const adminID = 817548398453325864;
 const moderatorID = 817631086673788938;
 const memberID = 817541859672981514;
@@ -49,41 +48,27 @@ const tooHornyID = 818316012121882644;
 const client = new Discord.Client({
   partials: ['MESSAGE', 'REACTION', 'CHANNEL'],
 });
+client.commands = new Discord.Collection();
 
+// load commands in adminitrative_commands
+const admincommandFiles = fs.readdirSync('./administrative_commands').filter(file => file.endsWith(".js"));
+
+// add them to the collection
+for (const file of admincommandFiles) {
+  const command = require(`./administrative_commands/${file}`);
+  client.commands.set(command.name, command);
+}
 
 // function to sanitize msgs and return an array of commands and arguments
 // returns 0 if the message is not a command
 // i.e `!mute @jeff` becomes ['mute', 'jeff'];
+const prefix = "!";
+
 function sanitizeCommand(msg) {
-  if (!msg.content.startsWith(prefix)) return 0;
-  let sanitized = msg.content.replace(prefix,'');
-  return sanitized.split(" ");
-}
-
-// function to get a user from the client.users.cache Collection given a mention
-function getUserFromMention(mention) {
-	if (!mention) return;
-
-	if (mention.startsWith('<@') && mention.endsWith('>')) {
-		mention = mention.slice(2, -1);
-
-		if (mention.startsWith('!')) {
-			mention = mention.slice(1);
-		}
-
-		return client.users.cache.get(mention);
-	}
-}
-
-// function to get a user from the client.users.cache Collection given a mention
-function getMemberFromMention(msg) {
-	return msg.mentions.members.first();
-}
-
-
-
-
-
+    if (!msg.content.startsWith(prefix)) return 0;
+    let sanitized = msg.content.replace(prefix,'');
+    return sanitized.split(" ");
+  }
 
 client.login(process.env.BOT_TOKEN);
 
@@ -97,206 +82,27 @@ client.on('ready', () => {
 
 // list emote command
 client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "website") {
-    msg.reply("https://aayu3.github.io/ATBotJSONDependencies/");
-    }
-});
-
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "commands") {
-    msg.reply("__**Supporters**__\n!supporter [Name/Number]\n!filtersup [Rarity/Type/Source]\n!intimacy [Name]\n__**Weapons**__\n!weapon [Name/Number]\n!filterwep [Rarity/Source]\n!weaponchar [Character]\n__**Guides**__\n!guide (For Beginner's Guide)\n!reroll (For Reroll Guide)");
-    }
-});
-
-//mute command
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "mute") {
-    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
-      if (messageContents.length <= 1) {
-        msg.reply("Please specify a user to mute");
-      } else {
-        let userMentioned = getUserFromMention(messageContents[1]);
-        let memberMentioned = getMemberFromMention(msg);
-        if (!userMentioned) {
-          return msg.reply('Please use a proper mention to mute');
-        } else {
-          // using this as a temporary solution until i fix getMemberFromMention
-          let mutedRole = msg.guild.roles.cache.find(r => r.name === "Muted");
-          let memberRole = msg.guild.roles.cache.find(r => r.name === "Member");
-          memberMentioned.roles.add(mutedRole);
-          memberMentioned.roles.remove(memberRole);
-          msg.reply(userMentioned.toString() + " has been muted");
-
-
-        }
-      }
-    } else {
-      msg.reply("You do not have sufficient permission to use this command.")
-    }
-  }
-});
-
-
-//bonk function for too horny role
-//mute command
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "bonk") {
-    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
-      if (messageContents.length <= 1) {
-        msg.reply("Please specify a user to bonk");
-      } else {
-        let userMentioned = getUserFromMention(messageContents[1]);
-        let memberMentioned = getMemberFromMention(msg);
-        if (!userMentioned) {
-          return msg.reply('Please use a proper mention to bonk');
-        } else {
-          // using this as a temporary solution until i fix getMemberFromMention
-          let hornyRole = msg.guild.roles.cache.find(r => r.name === "Horny");
-          let memberRole = msg.guild.roles.cache.find(r => r.name === "Member");
-          memberMentioned.roles.add(hornyRole);
-          memberMentioned.roles.remove(memberRole);
-          msg.reply(userMentioned.toString() + " has been sent to <#818313211538309130>");
-          msg.channel.send({files: ["bonk.gif"]});
-        }
-      }
-    } else {
-      msg.reply("You do not have sufficient permission to use this command.");
-    }
-  }
-});
-
-// change name function
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "setName") {
-    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
-      messageContents.shift();
-      let name = messageContents.join(' ');
-      client.user.setUsername(name);
-      msg.reply("Name has been set to: " + name);
-    } else {
-      msg.reply("You do not have sufficient permission to use this command.")
-    }
-  }
-});
-
-// change status function
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "setStatus") {
-    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
-      messageContents.shift();
-      let name = messageContents.join(' ');
-      client.user.setActivity(name);
-      msg.reply("Status has been set to: " + name);
-    } else {
-      msg.reply("You do not have sufficient permission to use this command.")
-    }
-  }
-});
-
-// get emote as string function
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "getEmote") {
-    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
-      messageContents.shift();
-      let name = messageContents.join(' ');
-      msg.reply("The emote is: ```" + name + "```");
-    } else {
-      msg.reply("You do not have sufficient permission to use this command.")
-    }
-  }
-});
-
-// change avatar function
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "setAvatar") {
-    if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
-      messageContents.shift();
-      let name = messageContents.join(' ');
-      client.user.setAvatar(name);
-    } else {
-      msg.reply("You do not have sufficient permission to use this command.")
-    }
-  }
-});
-
-// get member ID
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "getMemberID") {
-    let memberMentioned = getMemberFromMention(msg);
-    console.log(memberMentioned.id);
-  }
-});
-
-// test member id
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "pingMemberByID") {
-    let memberMentioned = msg.guild.members.cache.get(messageContents[1]);
-    msg.channel.send(memberMentioned.toString());
-  }
-});
-
-// guide command
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "guide") {
-    msg.reply("Here is the beginner's guide: http://actiontaiman.in/beginner_guide.html");
-  }
-});
-
-// reroll command
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "reroll") {
-    msg.reply("Here is the reroll guide: http://actiontaiman.in/reroll_guide.html");
-  }
-});
-
-// intimacy command
-client.on('message', (msg) => {
-  let messageContents = sanitizeCommand(msg);
-  if (messageContents[0] == "intimacy") {
+  if (!msg.content.startsWith(prefix) || msg.author.bot) return;
   
-    if(messageContents.length > 1) {
-      if (isNaN(parseInt(messageContents[1]))) {
-        // In this case the person is searching by name
-        let searchName = messageContents.slice(1).join(" ");
-        let filteredSups = supporterSearch.filterByName(searchName, supporters);
-        if (filteredSups.length == 0) {
-          msg.reply("There is no supporter with the name: " + searchName);
-        } else if (filteredSups.length == 1) {
-          let sup = filteredSups[0];
-          msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/intimacy_images/" + sup.Icon + "_0.png");
-        } else {
-          msg.reply("Please be more specific")
-        } 
-      }
-      else {
-        // In this case the person is searching by number
-        let num = parseInt(messageContents[1]) - 1;
-        if (num < 0 || num > supporters.length - 1) {
-          msg.reply("Please provide a number in the correct range: 1 - " + (supporters.length));
-        } else {
-          let sup = supporterSearch.searchByNumber(num + 1, supporters);
-          msg.channel.send("https://aayu3.github.io/ATBotJSONDependencies/intimacy_images/" + sup.Icon + "_0.png");
-        }
-      }
-      
-    }
-    else {
-      msg.reply("Please provide an argument.")
-    }
-  } 
+  const args = msg.content.slice(prefix.length).trim().split(/ +/);
+  const command = args.shift();
+
+  if (!client.commands.has(command)) return;
+
+  try {
+    client.commands.get(command).execute(msg, args);
+  } catch (error) {
+    console.error(error);
+    msg.reply("Error trying to execute this command.");
+  }
+  
 });
+
+
+
+
+
+
 
 // Search by number or name
 client.on('message', (msg) => {
