@@ -1,5 +1,4 @@
 const supporterSearch = require("../supporterSearch.js");
-const weaponSearch = require("../weaponSearch.js")
 
 // function to sanitize msgs and return an array of commands and arguments
 // returns 0 if the message is not a command
@@ -15,7 +14,7 @@ function sanitizeCommand(msg) {
 module.exports = {
     name: 'website',
     description : "Display the bot website",
-    execute(msg, args) {
+    execute(msg, supporters, args) {
       let messageContents = sanitizeCommand(msg);
       if (messageContents[0] == "website") {
         msg.reply("https://aayu3.github.io/ATBotJSONDependencies/");

@@ -1,5 +1,4 @@
 const supporterSearch = require("../supporterSearch.js");
-const weaponSearch = require("../weaponSearch.js")
 
 // function to sanitize msgs and return an array of commands and arguments
 // returns 0 if the message is not a command
@@ -13,8 +12,8 @@ function sanitizeCommand(msg) {
   }
 
 module.exports = {
-    name: 'website',
-    description : "Display the bot website",
+    name: 'intimacy',
+    description : "Display the intimacy scene of a supporter.",
     execute(msg, supporters, args) {
       let messageContents = sanitizeCommand(msg);
       if (messageContents[0] == "intimacy") {
