@@ -9,6 +9,7 @@ const characters = ["igawa asagi", "igawa sakura", "mizuki yukikaze", "akiyama r
 const url = "https://aayu3.github.io/ATBotJSONDependencies/supporters.json";
 let options = {json: true};
 
+// Initiate Gacha pool
 
 var supporters = [];
 var weapons = [];
@@ -16,9 +17,9 @@ request(url, options, (error, res, body) => {
     if (error) {
         return  console.log(error)
     };
-
     if (!error && res.statusCode == 200) {
         supporters = body;
+        
     };
 });
 
@@ -30,6 +31,7 @@ request(weaponurl, options, (error, res, body) => {
 
   if (!error && res.statusCode == 200) {
       weapons = body;
+      
   };
 });
 //get files ready
@@ -50,6 +52,7 @@ const client = new Discord.Client({
 client.admin_commands = new Discord.Collection();
 client.supporter_commands = new Discord.Collection();
 client.weapon_commands = new Discord.Collection();
+client.gacha_commands = new Discord.Collection();
 
 // Load commands in adminitrative_commands
 const admincommandFiles = fs.readdirSync('./administrative_commands').filter(file => file.endsWith(".js"));
@@ -78,6 +81,17 @@ for (const file of weaponcommandFiles) {
   client.weapon_commands.set(command.name, command);
 }
 
+// Load commands in adminitrative_commands
+const gachacommandFiles = fs.readdirSync('./gacha_commands').filter(file => file.endsWith(".js"));
+
+// Add them to the collection
+for (const file of gachacommandFiles) {
+  const command = require(`./gacha_commands/${file}`);
+  client.gacha_commands.set(command.name, command);
+}
+
+
+
 // function to sanitize msgs and return an array of commands and arguments
 // returns 0 if the message is not a command
 // i.e `!mute @jeff` becomes ['mute', 'jeff'];
@@ -89,6 +103,11 @@ client.on('ready', () => {
   console.log('The Bot is ready!')
 });
 
+
+
+
+
+
 // list emote command
 client.on('message', (msg) => {
   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
@@ -98,7 +117,7 @@ client.on('message', (msg) => {
 
   if (client.admin_commands.has(command)) {
     try {
-      client.admin_commands.get(command).execute(msg, args);
+      client.admin_commands.get(command).execute(msg, client, args);
     } catch (error) {
       console.error(error);
       msg.reply("Error trying to execute this command.");
@@ -113,6 +132,13 @@ client.on('message', (msg) => {
   } else if (client.weapon_commands.has(command)) {
     try {
       client.weapon_commands.get(command).execute(msg, weapons, args);
+    } catch (error) {
+      console.error(error);
+      msg.reply("Error trying to execute this command.");
+    }
+  } else if (client.gacha_commands.has(command)) {
+    try {
+      client.gacha_commands.get(command).execute(msg, supporters, weapons, args);
     } catch (error) {
       console.error(error);
       msg.reply("Error trying to execute this command.");

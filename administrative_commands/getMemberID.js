@@ -12,7 +12,7 @@ function sanitizeCommand(msg) {
 module.exports = {
     name: 'getMemberID',
     description : "Gets the mentioned member's ID",
-    execute(msg, args) {
+    execute(msg, client, args) {
       let messageContents = sanitizeCommand(msg);
       if (messageContents[0] == "getMemberID") {
         let memberMentioned = getMemberFromMention(msg);

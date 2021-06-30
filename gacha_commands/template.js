@@ -10,17 +10,16 @@ function sanitizeCommand(msg) {
   }
 
 module.exports = {
-    name: 'setAvatar',
-    description : "Changes the bot's avatar",
-    execute(msg, client, args) {
+    name: 'standardgacha',
+    description : "Roll standard gacha X times.",
+    execute(msg, supporters, weapons, args) {
       let messageContents = sanitizeCommand(msg);
-      if (messageContents[0] == "setAvatar") {
-        if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
-          messageContents.shift();
-          let name = messageContents.join(' ');
-          client.user.setAvatar(name);
+      if (messageContents[0] == "standardgacha") {
+        let numRolls = parseInt(messageContents[1]);
+        if (numRolls < 1 || numRolls > 20) {
+          msg.reply("You can only roll between 1 and 20 times");
         } else {
-          msg.reply("You do not have sufficient permission to use this command.")
+          
         }
       }
     }

@@ -10,7 +10,7 @@ function sanitizeCommand(msg) {
   }
 
 // function to get a user from the client.users.cache Collection given a mention
-function getUserFromMention(mention) {
+function getUserFromMention(mention, client) {
 	if (!mention) return;
 
 	if (mention.startsWith('<@') && mention.endsWith('>')) {
@@ -25,7 +25,7 @@ function getUserFromMention(mention) {
 }
 
 // function to get a user from the client.users.cache Collection given a mention
-function getMemberFromMention(msg) {
+function getMemberFromMention(msg, client) {
 	return msg.mentions.members.first();
 }
 
@@ -33,15 +33,15 @@ function getMemberFromMention(msg) {
 module.exports = {
     name: 'mute',
     description : "Mute a member",
-    execute(msg, args) {
+    execute(msg, client, args) {
       let messageContents = sanitizeCommand(msg);
       if (messageContents[0] == "mute") {
         if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {
           if (messageContents.length <= 1) {
             msg.reply("Please specify a user to mute");
           } else {
-            let userMentioned = getUserFromMention(messageContents[1]);
-            let memberMentioned = getMemberFromMention(msg);
+            let userMentioned = getUserFromMention(messageContents[1], client);
+            let memberMentioned = getMemberFromMention(msg, client);
             if (!userMentioned) {
               return msg.reply('Please use a proper mention to mute');
             } else {

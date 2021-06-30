@@ -12,7 +12,7 @@ function sanitizeCommand(msg) {
 module.exports = {
     name: 'getEmote',
     description : "Gets the id of an emote",
-    execute(msg, args) {
+    execute(msg, client, args) {
       let messageContents = sanitizeCommand(msg);
       if (messageContents[0] == "getEmote") {
         if(msg.member.roles.cache.some(r=>["Admin", "Moderator", "Reddit Moderator"].includes(r.name)) ) {

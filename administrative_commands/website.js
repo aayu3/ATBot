@@ -12,7 +12,7 @@ function sanitizeCommand(msg) {
 module.exports = {
     name: 'website',
     description : "Display the bot website",
-    execute(msg, args) {
+    execute(msg, client, args) {
       let messageContents = sanitizeCommand(msg);
       if (messageContents[0] == "website") {
         msg.reply("https://aayu3.github.io/ATBotJSONDependencies/");

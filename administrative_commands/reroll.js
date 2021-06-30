@@ -12,7 +12,7 @@ function sanitizeCommand(msg) {
 module.exports = {
     name: 'reroll',
     description : "Display the reroll guide",
-    execute(msg, args) {
+    execute(msg, client, args) {
       let messageContents = sanitizeCommand(msg);
       if (messageContents[0] == "reroll") {
         msg.reply("Here is the reroll guide: http://actiontaiman.in/reroll_guide.html");

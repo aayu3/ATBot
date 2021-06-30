@@ -12,7 +12,7 @@ function sanitizeCommand(msg) {
 module.exports = {
     name: 'commands',
     description : "Display the bot commands",
-    execute(msg, args) {
+    execute(msg, client, args) {
         let messageContents = sanitizeCommand(msg);
         if (messageContents[0] == "commands") {
           msg.reply("__**Supporters**__\n!supporter [Name/Number]\n!filtersup [Rarity/Type/Source]\n!intimacy [Name]\n__**Weapons**__\n!weapon [Name/Number]\n!filterwep [Rarity/Source]\n!weaponchar [Character]\n__**Guides**__\n!guide (For Beginner's Guide)\n!reroll (For Reroll Guide)");

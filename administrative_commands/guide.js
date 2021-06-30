@@ -12,7 +12,7 @@ function sanitizeCommand(msg) {
 module.exports = {
     name: 'guide',
     description : "Display the beginner guide",
-    execute(msg, args) {
+    execute(msg, client, args) {
       let messageContents = sanitizeCommand(msg);
       if (messageContents[0] == "guide") {
         msg.reply("Here is the beginner's guide: http://actiontaiman.in/beginner_guide.html");
