@@ -70,9 +70,9 @@ module.exports = {
                 if (weapon.Particle != -1) {
                     strRep = strRep + "\n**Particle Cost: **" + particleEmote + " x " + Math.floor(weapon.Particle/100);
                 }
-                description = description.replace(/ *\[[^\]]*]/g, ' ');
+                description = description.replace(/ ?\[[^\]]*]/g, ' ');
                 description = description.trim();
-                description = description.split("  ").join(" ");
+                description = description.replace(/  +/g, ' ');
                 description = description.split("Passive : ").join("**Passive:** ");
                 description = description.split(" Active : ").join("**Active:** ");
                 console.log(description);

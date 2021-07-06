@@ -74,8 +74,9 @@ module.exports = {
                 strRep = strRep + " **CD:** " + supporter.CD + "s";  
             }
             let description = supporter.MainSkillDescription;
-            description = description.replace(/ *\[[^\]]*]/g, ' ');
+            description = description.replace(/ ?\[[^\]]*]/g, ' ');
             description = description.trim();
+            description = description.replace(/  +/g, ' ');
             description = description.split('Passive : ').join('**Passive:** ');
             description = description.split(' Active : ').join('**Active:** ');
             console.log(description);
