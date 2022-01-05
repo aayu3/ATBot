@@ -6,7 +6,10 @@ const supporterSearch = require("../supporterSearch.js");
 const prefix = "!";
 
 function sanitizeCommand(msg) {
-    if (!msg.content.startsWith(prefix)) return 0;
+    if (
+      //!msg.content.startsWith(prefix)
+      true
+    ) return 0;
     let sanitized = msg.content.replace(prefix,'');
     return sanitized.split(" ");
   }
